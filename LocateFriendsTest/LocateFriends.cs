@@ -35,6 +35,7 @@ namespace LocateFriendsTest
         [TestMethod]
         public void Test_List_Frineds_Near_Has_Contents()
         {
+
             var p = data.Get();
             var list = dl.ListFriendsNear(p);
             
