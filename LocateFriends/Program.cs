@@ -1,3 +1,4 @@
+using LocateFriends.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,29 @@ namespace LocateFriends
     {
         static void Main(string[] args)
         {
+            string commmand = "";
+            try
+            {
+                
+                Utils.Message("REGISTRAR/LOCALIZAR AMIGOS ...");
+                Utils.Message("Commandos: (F)inalizar (R)egistrar (L)istar");
+                Utils.PrintLine("-");
+                while (commmand.ToUpper() != "F")
+                {
+                    commmand = Console.ReadLine();
+                }
+                
 
+            }
+            catch (Exception ex)
+            {
 
-            Console.WriteLine("Hello World!");
-            Console.ReadKey();
+                Utils.Message(ex.Message);
+            }
+            finally
+            {
+
+            }
         }
     }
 }
