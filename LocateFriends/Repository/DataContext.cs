@@ -9,6 +9,8 @@ namespace LocateFriends.Repository
     {
         public Person Person { get; set; }
         private string Fname = string.Format("{0}", System.Environment.CurrentDirectory+ "\\Person.Json");
+
+        #region Construtores
         public DataContext()
         {
 
@@ -17,12 +19,30 @@ namespace LocateFriends.Repository
 
             }
         }
+        #endregion
+
+        #region Metodos Publicos
+        public Person Get()
+        {
+            return getPerson();
+        }
 
         public void Save(Person person)
         {
             var txt = JsonConvert.SerializeObject(person);
             SaveFile(txt);
         }
+
+        public void Clear()
+        {
+            File.Delete(Fname);            
+            
+        }
+
+
+        #endregion
+
+
 
         private void  SaveFile(string txt)
         {

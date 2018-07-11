@@ -27,5 +27,34 @@ namespace LocateFriends.Helper
             //Console.BufferWidth = Console.WindowWidth;
             //Console.BufferHeight = Console.WindowHeight;
         }
+
+        public static void PrintHeader(string msg="")
+        {
+            ConsoleColor foreColor = Console.ForegroundColor;
+            ConsoleColor BackColor = Console.BackgroundColor;
+            Console.Clear();
+            
+            Utils.Message("REGISTRAR/LOCALIZAR AMIGOS ...");
+            Utils.Message("Commandos: (F)inalizar (R)egistrar (L)istar (LIMPAR-REGISTROS)");            
+            Utils.PrintLine("-");
+            if (!string.IsNullOrEmpty(msg))
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Message(msg);
+                Console.ForegroundColor = foreColor;
+            }
+            
+        }
+
+        public static void PrintError(string msg)
+        {
+            ConsoleColor foreColor = Console.ForegroundColor;
+            ConsoleColor BackColor = Console.BackgroundColor;
+            PrintHeader();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Message(msg);
+            Console.ForegroundColor = foreColor;
+
+        }
     }
 }
