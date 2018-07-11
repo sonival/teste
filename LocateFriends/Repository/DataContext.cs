@@ -1,5 +1,6 @@
 ﻿
 using Newtonsoft.Json;
+using System.Linq;
 using System.IO;
 
 namespace LocateFriends.Repository
@@ -8,6 +9,7 @@ namespace LocateFriends.Repository
     public class DataContext
     {
         public Person Person { get; set; }
+        
         private string Fname = string.Format("{0}", System.Environment.CurrentDirectory+ "\\Person.Json");
 
         #region Construtores
@@ -27,9 +29,12 @@ namespace LocateFriends.Repository
             return getPerson();
         }
 
+        
+
         public void Save(Person person)
         {
             var txt = JsonConvert.SerializeObject(person);
+            
             SaveFile(txt);
         }
 

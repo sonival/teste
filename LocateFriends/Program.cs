@@ -1,3 +1,4 @@
+using LocateFriends.Dal;
 using LocateFriends.Helper;
 using LocateFriends.Repository;
 using System;
@@ -12,6 +13,7 @@ namespace LocateFriends
     {
         public static Person Person { get; set; }
         private static DataContext Data = new DataContext();
+        private readonly static DL dl = new DL();
         private static string Commmand
         {
             get; set;
@@ -114,6 +116,13 @@ namespace LocateFriends
                     ListFriends();
                 }
 
+                if (Commmand.ToUpper() == "G")
+                {
+                    Utils.PrintHeader();
+                    PrintFriendsNear(dl.ListFriendsNear(Person));
+                    
+                }
+
                 if (Commmand.ToUpper() == "LIMPAR-REGISTROS")
                 {
                     Data.Clear();
@@ -176,6 +185,23 @@ namespace LocateFriends
             }
             Console.CursorLeft = offset;    
         }
+
+        
+        private static void PrintFriendsNear(List<Tuple<string, double>> list)
+        {
+            if (list.Count > 0)
+            {
+                Utils.Message("Amigos mais próximos:");
+                list = list.OrderBy(g => g.Item2).ToList();
+                foreach (var l in list)
+                {
+                    Utils.Message(string.Format("{0} {1}", l.Item1, l.Item2));
+                }
+            }
+        }
+        
+
+
         #endregion
     }
 }
