@@ -57,7 +57,7 @@ namespace LocateFriends
 
                     Utils.PrintHeader("Finalizado");
                     var p = RegisterPerson();
-                    if (!string.IsNullOrEmpty(p.Name))
+                    if (!string.IsNullOrEmpty(p.Name) )
                     {
                         Utils.PrintHeader();
                         Person = p;
@@ -72,6 +72,7 @@ namespace LocateFriends
                     Utils.Message(GetMyLocation());
                     Utils.Message("");
                     Utils.Message(String.Format("{0}, registre seus amigos", Person.Name));
+                    Utils.PrintLine("*");
                     var f = RegisterPerson();
                     if (!string.IsNullOrEmpty(f.Name))
                     {
@@ -144,13 +145,28 @@ namespace LocateFriends
             Person person = new Person();
             try
             {
+                string msg = "Digite o Nome, X para sair";
+                if(string.IsNullOrEmpty(Person.Name))
+                {
+                    msg = "Ola, faça seu registro primerio para em seguida registrar seus amigos(as)\n Digite X para sair ou seu nome para continuar....:";
+                }
+                Utils.Message(msg);
 
-                Utils.Message("Nome");
                 person.Name = Console.ReadLine();
-                Utils.Message("Latitude");
-                person.Coordinates.Latitude = Convert.ToDouble(Console.ReadLine());
-                Utils.Message("Longitude");
-                person.Coordinates.Longitude = Convert.ToDouble(Console.ReadLine());
+                if(person.Name.ToUpper() == "X")
+                {
+                    person.Name = null;
+                    Utils.PrintHeader();
+                    
+                }
+                else
+                {
+                    Utils.Message("Latitude");
+                    person.Coordinates.Latitude = Convert.ToDouble(Console.ReadLine());
+                    Utils.Message("Longitude");
+                    person.Coordinates.Longitude = Convert.ToDouble(Console.ReadLine());
+                }
+                
 
             }
             catch (Exception e)
@@ -192,6 +208,7 @@ namespace LocateFriends
             if (list.Count > 0)
             {
                 Utils.Message("Amigos mais próximos:");
+                
                 list = list.OrderBy(g => g.Item2).ToList();
                 foreach (var l in list)
                 {
